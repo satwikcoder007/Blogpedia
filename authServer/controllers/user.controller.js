@@ -1,4 +1,6 @@
 import {User} from "../models/User.js"
+import axios from "axios"
+
 
 const registerUser = async (req, res) => {
   try {
@@ -12,6 +14,37 @@ const registerUser = async (req, res) => {
       password, 
       type
     });
+
+    let profileCreated = false;
+    let attempts = 0;
+    let lastError = null;
+    while (!profileCreated && attempts < 3) {
+      try {
+        console.log(user._id.toString())
+        await axios.post("http://localhost:8002/api/v1/createprofile", { 
+          name,
+          username,
+          userid: user._id.toString()
+        });
+        profileCreated = true;
+      } catch (profileError) {
+        lastError = profileError;
+        attempts++;
+        if (attempts < 3) {
+          await new Promise(resolve => setTimeout(resolve, 1000)); 
+        }
+      }
+    }
+
+    if(!profileCreated){
+      console.log("profile creation attempt failed:", lastError.message);
+      await User.findByIdAndDelete(user._id);
+      return res.status(500).json({
+        message: "Failed to create profile after multiple attempts. Registration rolled back.",
+        issue: lastError.message
+      });
+    }
+
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
@@ -84,3 +117,4 @@ const loginUser = async (req,res)=>{
 }
 
 export {registerUser, loginUser}
+
