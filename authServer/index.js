@@ -3,7 +3,7 @@ import { configDotenv } from "dotenv"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import dbConnector from "./config/dbconnection.js"
-import userRoutes from "./routes/userRouter.js"
+import userRoutes from "./routes/user.route.js"
 
 configDotenv() // Load environment variables from .env file
 
