@@ -8,7 +8,7 @@ import userRoutes from "./routes/userRouter.js"
 configDotenv() // Load environment variables from .env file
 
 const app = express() // Returns an instance of an Express server
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8000
 
 
 app.use(express.json({ extended: true, limit: '5mb' }))
