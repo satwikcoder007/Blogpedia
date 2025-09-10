@@ -1,5 +1,6 @@
 import {Profile} from "../models/Profile.js";
 import client from "../config/redisconnect.js";
+import axios from "axios";
 
 const createProfile = async(req,res)=>{
     try{
@@ -65,5 +66,36 @@ const getProfile = async(req,res)=>{
     }
 }
 
-export {createProfile, getProfile}
+const getUserBlogs = async(req,res)=>{
+    try {
+
+        const userid=req.params.userid
+        if(!userid){
+            return res.status(400).json({
+                message: "User ID is required"
+            })
+        }
+
+        
+        const blogs = await axios.get(`http://localhost:8001/api/v1/blog/${userid}`);
+
+
+        return res.status(200).json({
+            message: "Blogs fetched successfully",
+            blogs: blogs.data.message
+        });
+    } catch (error) {
+        if (error.response && error.response.status === 404) {
+            return res.status(404).json({
+                message: "No blog found"
+            });
+        } else {
+            res.status(500).json({
+                message: "Internal server error"
+            });
+        }
+    }
+}
+
+export {createProfile, getProfile, getUserBlogs}
 

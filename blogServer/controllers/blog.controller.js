@@ -8,7 +8,7 @@ const getBlog=asyncHandler( async(req,res)=>{
     const _id=req.params.id
 
     if(!_id){
-        throw new apiError(400,"Username is required")
+        throw new apiError(400,"User ID is required")
     }
 
     const blogs= await Blog.find({owner:_id})
