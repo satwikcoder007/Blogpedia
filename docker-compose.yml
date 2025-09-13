@@ -1,0 +1,36 @@
+version: "1.0"
+
+services:
+  auth:
+    build: ./authServer
+    container_name: auth_service
+    env_file:
+      - ./authServer/.env
+    ports:
+      - "8000:8000"
+    networks:
+      - backend
+
+  profile:
+    build: ./profileServer
+    container_name: profile_service
+    env_file:
+      - ./profileServer/.env
+    ports:
+      - "8002:8002"
+    networks:
+      - backend
+
+  blog:
+    build: ./blogServer
+    container_name: blog_service
+    env_file:
+      - ./blogServer/.env
+    ports:
+      - "8001:8001"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
