@@ -20,7 +20,7 @@ const registerUser = async (req, res) => {
     let lastError = null;
     while (!profileCreated && attempts < 3) {
       try {
-        console.log(user._id.toString())
+    
         await axios.post("http://localhost:8002/api/v1/createprofile", { 
           name,
           username,
