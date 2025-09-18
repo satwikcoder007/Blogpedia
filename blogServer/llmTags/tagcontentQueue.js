@@ -1,6 +1,9 @@
 import amqp from "amqplib"
-import { Blog } from "./models/Blog.js";
+import { Blog } from "../models/Blog.js";
 import {generateTags} from "./genTag.js"
+import { configDotenv } from "dotenv";
+
+configDotenv()
 
 export async function consumeQueue() {
   const conn = await amqp.connect(process.env.AMQP_URL);

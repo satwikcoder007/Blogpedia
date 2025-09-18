@@ -1,0 +1,24 @@
+# Force LF endings for shell scripts (bash)
+*.sh text eol=lf
+
+# Force LF endings for Dockerfiles
+Dockerfile text eol=lf
+
+# Force LF endings for config files (optional)
+*.conf text eol=lf
+
+# Force LF endings for JSON/YAML files
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Let Git handle JS/TS normally
+*.js text
+*.ts text
+
+# Ignore binaries
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary

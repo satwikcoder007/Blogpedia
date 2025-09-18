@@ -6,6 +6,5 @@ build
 coverage
 .env
 .env.local
-.env.*.local
 .vscode
 .DS_Store
