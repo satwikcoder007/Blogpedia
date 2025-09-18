@@ -1,6 +1,9 @@
 import {Profile} from "../models/Profile.js";
 import client from "../config/redisconnect.js";
 import axios from "axios";
+import { getServiceLogger } from "../config/logger.js";
+
+const logger = getServiceLogger('PROFILE');
 
 const createProfile = async(req,res)=>{
     try{
@@ -10,7 +13,7 @@ const createProfile = async(req,res)=>{
             username,
             userid
         });
-
+        logger.info(`Profile created for user ID: ${userid}`);
         res.status(200).json({
             message: `${name} profile created successfully`,
         })
@@ -53,7 +56,7 @@ const getProfile = async(req,res)=>{
         }
 
         await client.json.set(userid, "$", profile);
-
+        logger.info(`Profile fetched for user ID: ${userid}`);
         return res.status(200).json({
             message: "Profile fetched successfully",
             profile

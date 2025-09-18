@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+  auth:
+    build: ./authServer
+    container_name: auth_service
+    env_file:
+      - ./authServer/.env
+    ports:
+      - "8000:8000"
+    networks:
+      - backend
+    volumes:
+      - ./authServer:/app  
+      - /app/node_modules 
+      - ./api-gateway/log:/shared-logs  
+
+  profile:
+    build: ./profileServer
+    container_name: profile_service
+    env_file:
+      - ./profileServer/.env
+    ports:
+      - "8002:8002"
+    networks:
+      - backend
+    volumes:
+      - ./profileServer:/app
+      - /app/node_modules
+      - ./api-gateway/log:/shared-logs
+
+  blog:
+    build: ./blogServer
+    container_name: blog_service
+    env_file:
+      - ./blogServer/.env
+    ports:
+      - "8001:8001"
+    networks:
+      - backend
+    volumes:
+      - ./blogServer:/app
+      - /app/node_modules
+      - ./api-gateway/log:/shared-logs
+
+  nginx:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8080:80"
+    networks:
+      - backend
+    depends_on:
+      - blog
+      - auth
+      - profile
+    volumes:
+      - ./api-gateway/log:/var/log/nginx
+
+networks:
+  backend:
+    driver: bridge
