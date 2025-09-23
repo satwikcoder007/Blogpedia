@@ -7,6 +7,7 @@ const logger = getServiceLogger('PROFILE');
 
 const createProfile = async(req,res)=>{
     try{
+        
         const {name,username,userid} = req.body;
         const profile = await Profile.create({
             name,
@@ -80,7 +81,7 @@ const getUserBlogs = async(req,res)=>{
         }
 
         
-        const blogs = await axios.get(`http://localhost:8001/api/v1/blog/${userid}`);
+        const blogs = await axios.get(`http://blog_service:8001/api/v1/blog/${userid}`);
 
 
         return res.status(200).json({
