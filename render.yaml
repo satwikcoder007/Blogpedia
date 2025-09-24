@@ -4,6 +4,7 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./authServer/Dockerfile
+    buildContext: ./authServer
     autoDeploy: true
 
   - type: web
@@ -11,6 +12,7 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./profileServer/Dockerfile
+    buildContext: ./profileServer
     autoDeploy: true
 
   - type: web
@@ -18,6 +20,7 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./blogServer/Dockerfile
+    buildContext: ./blogServer
     autoDeploy: true
 
   - type: web
@@ -25,4 +28,5 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./api-gateway/Dockerfile
+    buildContext: ./api-gateway
     autoDeploy: true
