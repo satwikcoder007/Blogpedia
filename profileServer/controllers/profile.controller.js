@@ -80,8 +80,7 @@ const getUserBlogs = async(req,res)=>{
             })
         }
 
-        
-        const blogs = await axios.get(`http://blog_service:8001/api/v1/blog/${userid}`);
+        const blogs = await axios.get(`${process.env.BLOG_URL}/${userid}`);
 
 
         return res.status(200).json({
