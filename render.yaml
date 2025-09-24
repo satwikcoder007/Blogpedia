@@ -4,21 +4,18 @@ services:
     env: docker
     dockerfilePath: ./authServer/Dockerfile
     autoDeploy: true
-    envFilePath: ./authServer/.env
 
   - type: pserv
     name: profile_service
     env: docker
     dockerfilePath: ./profileServer/Dockerfile
     autoDeploy: true
-    envFilePath: ./profileServer/.env
 
   - type: pserv
     name: blog_service
     env: docker
     dockerfilePath: ./blogServer/Dockerfile
     autoDeploy: true
-    envFilePath: ./blogServer/.env
 
   - type: web
     name: api_gateway
