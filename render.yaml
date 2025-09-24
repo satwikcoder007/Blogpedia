@@ -2,23 +2,27 @@ services:
   - type: pserv
     name: auth_service
     env: docker
+    plan: free
     dockerfilePath: ./authServer/Dockerfile
     autoDeploy: true
 
   - type: pserv
     name: profile_service
     env: docker
+    plan: free
     dockerfilePath: ./profileServer/Dockerfile
     autoDeploy: true
 
   - type: pserv
     name: blog_service
     env: docker
+    plan: free
     dockerfilePath: ./blogServer/Dockerfile
     autoDeploy: true
 
   - type: web
     name: api_gateway
     env: docker
+    plan: free
     dockerfilePath: ./api-gateway/Dockerfile
     autoDeploy: true
