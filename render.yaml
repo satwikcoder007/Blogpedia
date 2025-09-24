@@ -1,19 +1,19 @@
 services:
-  - type: private_service
+  - type: pserv
     name: auth_service
     env: docker
     dockerfilePath: ./authServer/Dockerfile
     autoDeploy: true
     envFilePath: ./authServer/.env
 
-  - type: private_service
+  - type: pserv
     name: profile_service
     env: docker
     dockerfilePath: ./profileServer/Dockerfile
     autoDeploy: true
     envFilePath: ./profileServer/.env
 
-  - type: private_service
+  - type: pserv
     name: blog_service
     env: docker
     dockerfilePath: ./blogServer/Dockerfile
